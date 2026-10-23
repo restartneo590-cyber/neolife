@@ -388,6 +388,9 @@ window.NEO_CONFIG = {
   lastUrl=`https://wa.me/${String(config.whatsappPhone||'996774560660').replace(/\D/g,'')}?text=${encodeURIComponent(lines.join('\n'))}`;
   // A WhatsApp *open attempt* is not a confirmed message sent, booking or paid patient.
   fire('form_complete');fire('whatsapp_open');
+  if (typeof fbq === 'function') {
+  fbq('track', 'Contact');
+}
   const win=window.open(lastUrl,'_blank','noopener,noreferrer');
   if(!win){ /* Some mobile browsers open an external-app prompt; retry link remains visible below. */ }
   form.hidden=true;qs('#form-done').hidden=false;progress.textContent=t.done;
